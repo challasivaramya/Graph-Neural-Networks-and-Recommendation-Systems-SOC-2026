@@ -13,4 +13,6 @@ def gram_schmidt(A: np.ndarray) -> np.ndarray:
             U[i]=v
     norm=np.linalg.norm(U,axis=1)
     Q=(U/norm[:,None]).T
-    return Q
+    if np.allclose(Q.T@Q,np.eye(Q.shape[1])):
+        return Q
+    raise Exception("Q^TQ is not identity")
